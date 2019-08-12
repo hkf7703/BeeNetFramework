@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0BB4C4F8-F3F2-4F4A-B5F3-39E3F4172A9D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bee</RootNamespace>
+    <AssemblyName>Bee.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Library\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collections\IndexableCollection.cs" />
+    <Compile Include="CoreException.cs" />
+    <Compile Include="Caching\CacheManager.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="DataMapping.cs" />
+    <Compile Include="Data\BeeCommand.cs" />
+    <Compile Include="BeeDataAdapter.cs" />
+    <Compile Include="Data\BeeObject.cs" />
+    <Compile Include="Data\DataAdapterParser.cs" />
+    <Compile Include="Data\DataException.cs" />
+    <Compile Include="Data\DbDriver.cs" />
+    <Compile Include="Data\DbDriverFactory.cs" />
+    <Compile Include="Data\DbSession.cs" />
+    <Compile Include="Data\OrmUtil.cs" />
+    <Compile Include="Data\SchemaEntity.cs" />
+    <Compile Include="Data\SqlCriteria.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="Emit\EmitUtil.cs" />
+    <Compile Include="Emit\EntityProxyManager.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="FlyweightBase.cs" />
+    <Compile Include="Logging\ConsoleLogImpl.cs" />
+    <Compile Include="Logging\FileLogImpl.cs" />
+    <Compile Include="Logging\ILogImpl.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LogSettingUtil.cs" />
+    <Compile Include="Net\DNSResolver.cs" />
+    <Compile Include="Net\HttpSocket\HttpSocketServer.cs" />
+    <Compile Include="Net\HttpSocket\HttpSocketHandler.cs" />
+    <Compile Include="Net\HttpSocket\RequestParser.cs" />
+    <Compile Include="Net\Interfaces\ISocket.cs" />
+    <Compile Include="Net\Interfaces\ISocketConnection.cs" />
+    <Compile Include="Net\Interfaces\ISocketServer.cs" />
+    <Compile Include="Net\Interfaces\ISocketHandler.cs" />
+    <Compile Include="Net\SocketConnection.cs" />
+    <Compile Include="Net\SocketServer.cs" />
+    <Compile Include="Net\SocketWrapper.cs" />
+    <Compile Include="Net\WebSocket\Handlers\ComposableHandler.cs" />
+    <Compile Include="Net\WebSocket\Handlers\Draft76Handler.cs" />
+    <Compile Include="Net\WebSocket\Handlers\Hybi13Handler.cs" />
+    <Compile Include="Net\WebSocket\IWebSocketHandler.cs" />
+    <Compile Include="Net\WebSocket\RequestParser.cs" />
+    <Compile Include="Net\WebSocket\WebSocketHandler.cs" />
+    <Compile Include="Net\WebSocket\WebSocketHandlerFactory.cs" />
+    <Compile Include="Net\WebSocket\WebSocketHttpRequest.cs" />
+    <Compile Include="Net\WebSocket\WebSocketServer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scope.cs" />
+    <Compile Include="Service\BaseRunService.cs" />
+    <Compile Include="Service\ServiceManager.cs" />
+    <Compile Include="Threading\CountUpLatch.cs" />
+    <Compile Include="Threading\CountDownLatch.cs" />
+    <Compile Include="Threading\Deferred.cs" />
+    <Compile Include="Threading\SmartQueue\AbstractSmartQueue.cs" />
+    <Compile Include="Threading\SmartQueue\IConsumer.cs" />
+    <Compile Include="Threading\SmartQueue\IProducer.cs" />
+    <Compile Include="Threading\SmartQueue\IProducerConsumer.cs" />
+    <Compile Include="Threading\SmartQueue\ISmartQueue.cs" />
+    <Compile Include="Util\ByteUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\ConfigUtil.cs" />
+    <Compile Include="Util\ConvertUtil.cs" />
+    <Compile Include="Util\DataUtil.cs" />
+    <Compile Include="Util\DrawingUtil.cs" />
+    <Compile Include="Util\ExpressionUtil.cs" />
+    <Compile Include="Util\GeneralUtil.cs" />
+    <Compile Include="Util\HttpContextUtil.cs" />
+    <Compile Include="Util\IOUtil.cs" />
+    <Compile Include="Util\NetworkUtil.cs" />
+    <Compile Include="Util\ReflectionUtil.cs" />
+    <Compile Include="Util\ResourceUtil.cs" />
+    <Compile Include="Util\SecurityUtil.cs" />
+    <Compile Include="Util\SerializeUtil.cs" />
+    <Compile Include="Util\StringUtil.cs" />
+    <Compile Include="Util\ThrowExceptionHelper.cs" />
+    <Compile Include="Util\HttpUtil.cs" />
+    <Compile Include="Web\ActionResult.cs" />
+    <Compile Include="Web\Attributes.cs" />
+    <Compile Include="Web\BeeAutoModelInfo.cs" />
+    <Compile Include="Web\BeeHtmlHelper.cs" />
+    <Compile Include="Web\BeeMvcHandlerFactory.cs" />
+    <Compile Include="Web\BeeMvcResult.cs" />
+    <Compile Include="Web\BeePageView.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\BeeRoute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\BeeSessionKit.cs" />
+    <Compile Include="Web\ControllerBaseT.cs" />
+    <Compile Include="Web\ControllerBase.cs" />
+    <Compile Include="Web\ControllerManager.cs" />
+    <Compile Include="Web\CookieSessionStateStore.cs" />
+    <Compile Include="Web\HttpClient.cs" />
+    <Compile Include="Web\MvcDispatcher.cs" />
+    <Compile Include="Web\MvcException.cs" />
+    <Compile Include="Web\ProCacheSessionStateStore.cs" />
+    <Compile Include="Web\StaticFileHandler.cs" />
+    <Compile Include="Web\VirtualFile.cs" />
+    <Compile Include="XmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Error.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InnerViews\BeeAutoList.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InnerViews\BeeAutoShow.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\js\bee.html.xml" />
+    <EmbeddedResource Include="Resources\js\bee.min.js" />
+    <EmbeddedResource Include="Resources\js\jquery-1.8.0.min.js" />
+    <EmbeddedResource Include="Resources\js\jquery.validate.js" />
+    <EmbeddedResource Include="Resources\themes\core.css" />
+    <EmbeddedResource Include="Resources\themes\default\iframe.css" />
+    <EmbeddedResource Include="Resources\themes\default\images\accordion\accordion.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\account_info_bg.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\alert\alertpanel.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\alert\alertpanel_icon.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\anchor.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\button-bg.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\button\button_s.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\button\imgX.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\dialog-title-bg.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\dialog\dialogpanel.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\dialog\dialogpanel_icon.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\form\input_bg.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\form\input_bt.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\grid\grid.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\grid\resizeCol.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\grid\tableth.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\header_bg.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\icon.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\icons-all.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\icons.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\icons.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\layout\taskbar.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\layout\taskbar_control.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\layout\taskbar_icon.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\layout\toggleSidebar.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\listLine.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\login_bg.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\login_content_bg.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\login_header_bg.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\login_list.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\login_sub.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\menu\menu.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\menu\sparator_v.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\order_down.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\order_up.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\pagebreak.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\pageHeader_bg.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\panel\panel.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\panel\panel_icon.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\progressBar\progressBar_l.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\progressBar\progressBar_m.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\progressBar\progressBar_s.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\search-bg.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\search-bt.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\selection\select_close.jpg" />
+    <EmbeddedResource Include="Resources\themes\default\images\selection\select_tab_a_bg.jpg" />
+    <EmbeddedResource Include="Resources\themes\default\images\selection\select_tab_bg.jpg" />
+    <EmbeddedResource Include="Resources\themes\default\images\selection\select_tab_hover_bg.jpg" />
+    <EmbeddedResource Include="Resources\themes\default\images\shadow\shadow_c_c.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\shadow\shadow_c_l.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\shadow\shadow_c_r.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\shadow\shadow_f_c.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\shadow\shadow_f_l.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\shadow\shadow_f_r.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\shadow\shadow_h_c.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\shadow\shadow_h_l.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\shadow\shadow_h_r.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\tablepicker\highlighted.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\tablepicker\unhighlighted.gif" />
+    <EmbeddedResource Include="Resources\themes\default\images\tabs\tabscontrol.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\tabs\tabspage.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\tabs\tabspage_icon.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\tabs\tabspanel.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\themeButton.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\toolbar_bg.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\tree\check.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\tree\folder.png" />
+    <EmbeddedResource Include="Resources\themes\default\images\tree\tree.png" />
+    <EmbeddedResource Include="Resources\themes\default\style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\themes\default\images\panel\Thumbs.db" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

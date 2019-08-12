@@ -1,0 +1,51 @@
+.anchorclass{
+    background: url("images/anchor.gif") no-repeat scroll left center transparent;
+    border: 1px dotted #0000FF;
+    cursor: auto;
+    display: inline-block;
+    height: 16px;
+    width: 15px;
+}
+
+*{
+    font-family: 宋体;
+}
+.selectTdClass{
+    background-color:#3399FF !important
+}
+
+
+p{
+   margin: 1em 0;
+}
+
+.white-span{
+    white-space:pre;
+}
+.pagebreak{
+    border-bottom: 1px dotted #999999 !important;
+    border-top: 1px dotted #999999 !important;
+    clear: both !important;
+    cursor: default !important;
+    height: 5px !important;
+    padding: 0 !important;
+    width: 100% !important;
+    margin-bottom:10px;
+    height:5px !important;
+    overflow: hidden;
+}
+table{
+    margin-bottom:10px;
+    border-collapse:collapse;
+}
+
+td{
+    vertical-align:top;
+    padding:2px;
+    height:20px;
+    
+}
+
+pre{
+    background-color: #F8F8F8;border: 1px solid #CCCCCC;padding:10px 10px;margin:5px;word-wrap:normal;
+}

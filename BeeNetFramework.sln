@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bee.Core", "Bee.Core\Bee.Core.csproj", "{0BB4C4F8-F3F2-4F4A-B5F3-39E3F4172A9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bee.AuthAPI", "Bee.AuthAPI\Bee.AuthAPI.csproj", "{511CC793-486C-4428-9555-0B580D269DF0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BB4C4F8-F3F2-4F4A-B5F3-39E3F4172A9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BB4C4F8-F3F2-4F4A-B5F3-39E3F4172A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BB4C4F8-F3F2-4F4A-B5F3-39E3F4172A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BB4C4F8-F3F2-4F4A-B5F3-39E3F4172A9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{511CC793-486C-4428-9555-0B580D269DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{511CC793-486C-4428-9555-0B580D269DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{511CC793-486C-4428-9555-0B580D269DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{511CC793-486C-4428-9555-0B580D269DF0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40FAC87A-D671-455E-BA7D-7BA3CB9E92C6}
+	EndGlobalSection
+EndGlobal

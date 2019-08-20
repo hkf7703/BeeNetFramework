@@ -11,7 +11,7 @@ using Bee.Logging;
 
 namespace Bee.Web
 {
-    internal class ControllerInfo
+    public class ControllerInfo
     {
         public readonly string Name;
         public readonly string LowerName;

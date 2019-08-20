@@ -10,6 +10,7 @@ using Bee.Core;
 using Bee.Util;
 using Bee.Caching;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace Bee.Data
 {
@@ -716,6 +717,10 @@ values
 
             if (!string.IsNullOrEmpty(orderbyClause))
             {
+                ThrowExceptionUtil.ArgumentConditionTrue(
+                    !Regex.IsMatch(orderbyClause, @"[-|;|,|\/|\(|\)|\[|\]|\}|\{|%|\*|!|\']")
+                    , string.Empty, "orderbyClause contains invalid code");
+
                 orderbyClauseValue = string.Format("order by {0}", orderbyClause);
             }
 

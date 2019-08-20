@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bee.Core", "Bee.Core\Bee.Core.csproj", "{0BB4C4F8-F3F2-4F4A-B5F3-39E3F4172A9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bee.API", "Bee.API\Bee.API.csproj", "{511CC793-486C-4428-9555-0B580D269DF0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bee.WebDemo", "Bee.WebDemo\Bee.WebDemo.csproj", "{0A832A12-7AD4-4B14-996B-119A58A91AA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{0BB4C4F8-F3F2-4F4A-B5F3-39E3F4172A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BB4C4F8-F3F2-4F4A-B5F3-39E3F4172A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BB4C4F8-F3F2-4F4A-B5F3-39E3F4172A9D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{511CC793-486C-4428-9555-0B580D269DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{511CC793-486C-4428-9555-0B580D269DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{511CC793-486C-4428-9555-0B580D269DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{511CC793-486C-4428-9555-0B580D269DF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A832A12-7AD4-4B14-996B-119A58A91AA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A832A12-7AD4-4B14-996B-119A58A91AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A832A12-7AD4-4B14-996B-119A58A91AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A832A12-7AD4-4B14-996B-119A58A91AA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

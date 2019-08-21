@@ -39,7 +39,7 @@ namespace Bee.Web.Swagger
 
         public ExternalDocs externalDocs;
 
-        public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();
+        public Dictionary<string, object> vendorExtensions;
     }
 
     public class Info
@@ -56,7 +56,7 @@ namespace Bee.Web.Swagger
 
         public License license;
 
-        public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();
+        public Dictionary<string, object> vendorExtensions;
     }
 
     public class Contact
@@ -96,7 +96,7 @@ namespace Bee.Web.Swagger
 
         public IList<Parameter> parameters;
 
-        public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();
+        public Dictionary<string, object> vendorExtensions;
     }
 
     public class Operation
@@ -125,7 +125,7 @@ namespace Bee.Web.Swagger
 
         public IList<IDictionary<string, IEnumerable<string>>> security;
 
-        public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();
+        public Dictionary<string, object> vendorExtensions;
     }
 
     public class Tag
@@ -136,7 +136,7 @@ namespace Bee.Web.Swagger
 
         public ExternalDocs externalDocs;
 
-        public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();
+        public Dictionary<string, object> vendorExtensions;
     }
 
     public class ExternalDocs
@@ -225,7 +225,7 @@ namespace Bee.Web.Swagger
 
         public object example;
 
-        public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();
+        public Dictionary<string, object> vendorExtensions;
     }
 
     public class PartialSchema
@@ -264,7 +264,7 @@ namespace Bee.Web.Swagger
 
         public int? multipleOf;
 
-        public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();
+        public Dictionary<string, object> vendorExtensions;
     }
 
     public class Response
@@ -277,7 +277,7 @@ namespace Bee.Web.Swagger
 
         public object examples;
 
-        public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();
+        public Dictionary<string, object> vendorExtensions;
     }
 
     public class Header : PartialSchema
@@ -316,6 +316,6 @@ namespace Bee.Web.Swagger
 
         public IDictionary<string, string> scopes;
 
-        public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();
+        public Dictionary<string, object> vendorExtensions;
     }
 }

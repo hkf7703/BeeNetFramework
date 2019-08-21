@@ -1,4 +1,5 @@
-﻿using Bee.Web;
+﻿using Bee.Auth;
+using Bee.Web;
 using Bee.Web.Swagger;
 using System;
 using System.Collections.Generic;
@@ -28,9 +29,14 @@ namespace Bee.WebDemo.Controllers
         /// 测试
         /// </summary>
         /// <returns>json返回</returns>
-        public JsonResult Test()
+        public string Login(string name, string password)
         {
-            return null;
+            return LoginInfoManager.Instance.JwtToken("1000");
+        }
+
+        public ActionResult LoginInfo()
+        {
+            return Json(LoginInfoManager.Instance.LoginInfo);
         }
     }
 }

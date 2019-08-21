@@ -17,11 +17,13 @@ namespace Bee.Web.Swagger
             Uri url = HttpContextUtil.CurrentHttpContext.Request.Url;
             doc.host = "{0}:{1}".FormatWith(url.Host, url.Port);
             doc.basePath = "/";
+            doc.info = new Info() { title="swagger" };
 
             var _jsonSerializerSettings = 
                             new JsonSerializerSettings
                             {
-                                NullValueHandling = NullValueHandling.Ignore
+                                NullValueHandling = NullValueHandling.Ignore,
+                                
                             };
             var schemaRegistry = new SchemaRegistry(
                _jsonSerializerSettings, true, true, true, true);
@@ -51,7 +53,7 @@ namespace Bee.Web.Swagger
                         Parameter parameter = new Parameter();
                         parameter.name = pItem.Name;
 
-                        if (pItem.ParameterType.IsPrimitive)
+                        if (pItem.ParameterType.IsPrimitive || pItem.ParameterType == typeof(string))
                         {
                             parameter.@in = "query";
                         }
@@ -68,16 +70,21 @@ namespace Bee.Web.Swagger
 
                         post.parameters.Add(parameter);
                     }
+                    //consumes, produces
+                    post.consumes = new List<string> { "application/json", "text/json", "application/json-patch+json", "application/*+json" };
+                    post.produces = new List<string> { "application/json", "text/plain" , "text/json" };
 
 
                     // response
                     var responses = new Dictionary<string, Response>();
                     var responseType = method.ReturnType;
-                    if (responseType == null || responseType == typeof(void))
-                        responses.Add("204", new Response { description = "No Content" });
-                    else
-                        responses.Add("200", new Response { description = "OK"
-                            , schema = schemaRegistry.GetOrRegister(responseType) });
+
+                    responses.Add("200", new Response
+                    {
+                        description = "OK"
+                            ,
+                        schema = schemaRegistry.GetOrRegister(typeof(BeeMvcResult))
+                    });
 
                     post.responses = responses;
 
@@ -90,6 +97,24 @@ namespace Bee.Web.Swagger
             }
 
             doc.definitions = schemaRegistry.Definitions;
+
+            if (true)
+            {
+                doc.securityDefinitions = new Dictionary<string, SecurityScheme>();
+                doc.securityDefinitions.Add("Bearer", new SecurityScheme()
+                {
+                    description = "JWT认证请求头格式: \"Authorization: Bearer {token}\"",
+                    @in = "header",
+                    name = "Authorization",
+                    type = "apiKey"
+
+                });
+                doc.security = new List<IDictionary<string, IEnumerable<string>>>();
+
+                doc.security.Add(new Dictionary<string, IEnumerable<string>> {
+                    { "Bearer", Enumerable.Empty<string>() }
+                });
+            }
 
             var jsonResult = JsonConvert.SerializeObject(doc, Formatting.None, _jsonSerializerSettings);
 

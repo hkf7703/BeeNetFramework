@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bee.Core", "Bee.Core\Bee.Core.csproj", "{0BB4C4F8-F3F2-4F4A-B5F3-39E3F4172A9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bee.Core", "src\Bee.Core\Bee.Core.csproj", "{0BB4C4F8-F3F2-4F4A-B5F3-39E3F4172A9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bee.WebDemo", "Bee.WebDemo\Bee.WebDemo.csproj", "{0A832A12-7AD4-4B14-996B-119A58A91AA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bee.WebDemo", "src\Bee.WebDemo\Bee.WebDemo.csproj", "{0A832A12-7AD4-4B14-996B-119A58A91AA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

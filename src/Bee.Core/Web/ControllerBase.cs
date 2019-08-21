@@ -406,7 +406,7 @@ namespace Bee.Web
         /// </summary>
         /// <param name="model">the model.</param>
         /// <returns>the json result.</returns>
-        protected ActionResult Json(object model)
+        protected JsonResult Json(object model)
         {
             return new JsonResult(model);
         }
@@ -416,7 +416,7 @@ namespace Bee.Web
         /// </summary>
         /// <param name="url">the url to redirect.</param>
         /// <returns>the instance of the ActionResult</returns>
-        protected ActionResult Redirect(string url)
+        protected RedirectResult Redirect(string url)
         {
             return new RedirectResult(url);
         }
@@ -426,7 +426,7 @@ namespace Bee.Web
         /// </summary>
         /// <param name="actionName">the actionName to redirect.</param>
         /// <returns>the instance of the ActionResult</returns>
-        protected ActionResult RedirectAction(string actionName)
+        protected RedirectResult RedirectAction(string actionName)
         {
             return new RedirectResult(ControllerName, actionName);
         }
@@ -437,7 +437,7 @@ namespace Bee.Web
         /// <param name="controllerName">the controller name.</param>
         /// <param name="actionName">the action name.</param>
         /// <returns>the instance of the ActionResult.</returns>
-        protected ActionResult Redirect(string controllerName, string actionName)
+        protected RedirectResult Redirect(string controllerName, string actionName)
         {
             return new RedirectResult(controllerName, actionName);
         }

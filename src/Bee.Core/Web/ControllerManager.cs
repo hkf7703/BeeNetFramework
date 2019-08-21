@@ -19,6 +19,8 @@ namespace Bee.Web
         public readonly string DefaultAction;
         public readonly bool DefaultFlag;
 
+        private IEntityProxy entityProxy = null;
+
         public ControllerInfo(Type type)
         {
             try
@@ -26,7 +28,7 @@ namespace Bee.Web
                 this.Type = type;
                 this.Name = GetControllerName();
 
-                IEntityProxy entityProxy = EntityProxyManager.Instance.GetEntityProxyFromType(type);
+                entityProxy = EntityProxyManager.Instance.GetEntityProxyFromType(type);
 
                 BeeControllerAttribute beeControllerAttribute = entityProxy.GetCustomerAttribute<BeeControllerAttribute>();
                 if (beeControllerAttribute != null)
@@ -79,14 +81,11 @@ namespace Bee.Web
 
         internal object CreateInstance()
         {
-            IEntityProxy entityProxy = EntityProxyManager.Instance.GetEntityProxyFromType(Type);
             return entityProxy.CreateInstance();
         }
 
         internal object Invoke(BeeControllerBase instance, string methodName, BeeDataAdapter dataAdapter)
         {
-            IEntityProxy entityProxy = EntityProxyManager.Instance.GetEntityProxyFromType(Type);
-
             return entityProxy.Invoke(instance, methodName, dataAdapter);
         }
 
@@ -162,6 +161,14 @@ namespace Bee.Web
             }
 
             return result;
+        }
+
+        public IEnumerable<string> Keys
+        {
+            get
+            {
+                return ControllerDict.Keys;
+            }
         }
 
         private static void SearchControllers(Assembly assembly)

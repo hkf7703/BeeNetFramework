@@ -56,6 +56,8 @@ namespace Bee.Web
         /// 加入Area特性， AreaName与ControllerName以【|】拼接
         /// </summary>
         public string AreaName = string.Empty;
+
+        public string Description = string.Empty;
     }
 
     public class OutputCacheAttribute : Attribute
@@ -66,6 +68,8 @@ namespace Bee.Web
     {
         public bool DefaultFlag;
         public string RequestMethod;
+
+        public string Description = string.Empty;
 
         public ActionAttribute(bool defaultFlag, string requestMethod)
         {

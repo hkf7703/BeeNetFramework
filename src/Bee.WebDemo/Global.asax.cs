@@ -40,6 +40,9 @@ namespace Bee.WebDemo
                 }));
 
 
+            // 调试路由用 去掉注释试试
+            // BeeRouteHelper.DebugRoutes();
+
             BeeRouteHelper.RegisterMvcDispatcher(typeof(MyMvcDispatcher));
 
 
@@ -76,5 +79,12 @@ namespace Bee.WebDemo
 
     public class MyMvcDispatcher : MvcRouteDispatcher
     {
+        protected override void ActionExecuting(ActionExecutingArgs actionExcutingArgs)
+        {
+            string controllerName = actionExcutingArgs.ControllerName.ToLower();
+            string actionName = actionExcutingArgs.ActionName.ToLower();
+
+            base.ActionExecuting(actionExcutingArgs);
+        }
     }
 }

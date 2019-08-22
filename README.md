@@ -1,7 +1,7 @@
 # BeeNetFramework
 
 基于[一个接口的实现](https://www.cnblogs.com/hkf7703/archive/2012/03/29/2423285.html) 想法， 设计的一套集成了ORM， MVC， API， swagger， jwt的一套快速开发平台。
-(```)
+
     public interface IEntityProxy
     {
 
@@ -54,4 +54,3 @@
         object Invoke(object entity, string methodName, BeeDataAdapter dataAdapter);
 }
 
-(```)

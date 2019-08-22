@@ -52,5 +52,6 @@
         /// <returns>返回值</returns>
 
         object Invoke(object entity, string methodName, BeeDataAdapter dataAdapter);
-}
+        }
+
 

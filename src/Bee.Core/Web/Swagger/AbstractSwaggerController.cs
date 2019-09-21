@@ -17,7 +17,7 @@ namespace Bee.Web.Swagger
             Uri url = HttpContextUtil.CurrentHttpContext.Request.Url;
             doc.host = "{0}:{1}".FormatWith(url.Host, url.Port);
             doc.basePath = "/";
-            doc.info = new Info() { title="swagger" };
+            doc.info = new Info() { title="swagger", version="1.0" };
 
             var _jsonSerializerSettings = 
                             new JsonSerializerSettings

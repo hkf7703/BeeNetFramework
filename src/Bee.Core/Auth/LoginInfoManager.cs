@@ -37,9 +37,24 @@ namespace Bee.Auth
                 var heads = HttpContextUtil.CurrentHttpContext.Request.Headers;
                 jwt = heads[LoginInfoManager.Jwt_Authorization];
 
-                string accountId = ParseToken(jwt);
-                loginInfo.AccountId = accountId;
+                if (!string.IsNullOrEmpty(jwt))
+                {
+                    ThrowExceptionUtil.ArgumentConditionTrue(jwt.Length > 5, string.Empty, "invalid jwt");
 
+                    if(jwt.StartsWith("Bearer"))
+                    {
+                        jwt = jwt.Substring(7);
+                    }
+
+                    string accountId = ParseToken(jwt);
+                    loginInfo.AccountId = accountId;
+                }
+                else
+                {
+                    ThrowExceptionUtil.ThrowMessageException("invalid jwt!");
+
+                    
+                }
                 return loginInfo;
             }
         }

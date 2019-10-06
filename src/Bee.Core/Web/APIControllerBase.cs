@@ -11,6 +11,11 @@ using System.Threading.Tasks;
 
 namespace Bee.Web
 {
+    public interface IAPIModel
+    {
+        void Validate();
+    }
+
     public abstract class APIControllerBase : ControllerBase
     {
 

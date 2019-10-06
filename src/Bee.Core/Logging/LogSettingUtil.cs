@@ -24,7 +24,7 @@ namespace Bee.Logging
 
             if (!string.IsNullOrEmpty(loggingSetting))
             {
-                logSetting = SerializeUtil.SimpleDeserialize<LogSetting>(loggingSetting);
+                logSetting = SerializeUtil.FromJson<LogSetting>(loggingSetting);
             }
             else
             {

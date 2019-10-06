@@ -52,6 +52,8 @@ namespace Bee.Web
 
         public override void Ouput(HttpContext context)
         {
+            context.Response.AppendHeader("Content-Type", "application/json; charset=utf-8");
+
             context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(mvcResult));
         }
     }
@@ -66,6 +68,7 @@ namespace Bee.Web
 
         public override void Ouput(HttpContext context)
         {
+
             if (content != null)
             {
                 context.Response.Write(content);
@@ -89,7 +92,7 @@ namespace Bee.Web
             stream.Position = 0;
             context.Response.ClearContent();
             context.Response.ContentType = MimeTypes.GetMimeType(fileName);
-            context.Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}",
+            context.Response.AppendHeader("Content-Disposition", string.Format("attachment;filename={0}",
                 System.Web.HttpUtility.UrlEncode(this.fileName, Encoding.UTF8)));
 
             context.Response.BinaryWrite(GetStreamBuffer(stream));

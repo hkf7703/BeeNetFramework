@@ -28,9 +28,13 @@ namespace Bee.Util
         /// </summary>
         /// <param name="input">the value needed to be encrypted.</param>
         /// <returns>the encrypted string.</returns>
-        public static string MD5EncryptS(string input)
+        public static string MD5EncryptS(string input, bool lowerCase = false)
         {
-            return System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(input, "MD5");
+            var source = Encoding.UTF8.GetBytes(input);
+            using (var md5Hash = MD5.Create())
+            {
+                return md5Hash.ComputeHash(source).ToHex(lowerCase);
+            }
         }
 
         /// <summary>

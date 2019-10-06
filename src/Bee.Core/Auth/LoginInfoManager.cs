@@ -39,7 +39,10 @@ namespace Bee.Auth
 
                 if (!string.IsNullOrEmpty(jwt))
                 {
-                    ThrowExceptionUtil.ArgumentConditionTrue(jwt.Length > 5, string.Empty, "invalid jwt");
+                    if(jwt.Length < 7) // jwt 太短了
+                    {
+                        ThrowExceptionUtil.ThrowHttpCodeException(403, "invalid jwt");
+                    }
 
                     if(jwt.StartsWith("Bearer"))
                     {
@@ -51,9 +54,7 @@ namespace Bee.Auth
                 }
                 else
                 {
-                    ThrowExceptionUtil.ThrowMessageException("invalid jwt!");
-
-                    
+                    ThrowExceptionUtil.ThrowHttpCodeException(403, "invalid jwt");
                 }
                 return loginInfo;
             }

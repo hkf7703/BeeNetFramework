@@ -131,6 +131,7 @@
     <Compile Include="Scope.cs" />
     <Compile Include="Service\BaseRunService.cs" />
     <Compile Include="Service\ServiceManager.cs" />
+    <Compile Include="BeeDomainService.cs" />
     <Compile Include="Threading\CountUpLatch.cs" />
     <Compile Include="Threading\CountDownLatch.cs" />
     <Compile Include="Threading\Deferred.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Util\DataUtil.cs" />
     <Compile Include="Util\DrawingUtil.cs" />
     <Compile Include="Util\ExpressionUtil.cs" />
+    <Compile Include="Util\ExtUtil.cs" />
     <Compile Include="Util\GeneralUtil.cs" />
     <Compile Include="Util\HttpContextUtil.cs" />
     <Compile Include="Util\IOUtil.cs" />

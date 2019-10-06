@@ -30,6 +30,7 @@ namespace Bee.Web
         public BeeDataAdapter Data { get; set; }
         public ActionExecutingResult Result { get; set; }
         public string Message { get; set; }
+        public int Code { get; set; }
     }
 
     public class MvcDispatcher : IHttpHandler, IRequiresSessionState , IHttpAsyncHandler
@@ -93,7 +94,7 @@ namespace Bee.Web
                 }
                 // 解析inputstream
                 string json = new StreamReader(httpContext.Request.InputStream).ReadToEnd();
-                if (!string.IsNullOrEmpty(json))
+                if (!string.IsNullOrEmpty(json) && json.StartsWith("{"))
                 {
                     var jObject = Newtonsoft.Json.Linq.JObject.Parse(json);
                     foreach(var item in jObject)
@@ -116,14 +117,18 @@ Request:{1}".FormatWith(cookieData.ToString(), dataAdapter.ToString()));
                 }
 
                 ActionExecutingArgs args = new ActionExecutingArgs(controllerName, actionName, dataAdapter);
-                ActionExecuting(args);
+                ActionExecuting(args); // 提供拦截通道
                 if (args.Result != ActionExecutingResult.OK)
                 {
                     BeeMvcResult mvcResult = new BeeMvcResult();
                     mvcResult.code = 400;
-                    mvcResult.message = args.Message;
+                    if(args.Code > 0)
+                    {
+                        mvcResult.code = args.Code;
+                    }
+                    mvcResult.msg = args.Message;
 
-                    httpContext.Response.Write(SerializeUtil.ToJson(mvcResult));
+                    WriteMvcResult(httpContext, mvcResult);
                     return;
                 }
 
@@ -227,13 +232,26 @@ Request:{1}".FormatWith(cookieData.ToString(), dataAdapter.ToString()));
         }
 
         protected virtual void ActionError(string controllerName, string actionName, BeeDataAdapter dataAdapter, Exception innerException)
-        {
+        { 
             BeeMvcResult mvcResult = new BeeMvcResult();
             mvcResult.code = 400;
-            mvcResult.message = innerException.Message;
+            mvcResult.msg = innerException.Message;
+
+            var httpException = innerException as HttpException;
+            if(httpException != null)
+            {
+                mvcResult.code = httpException.GetHttpCode();
+            }
+
+            var coreException = innerException as CoreException;
+            if(coreException != null)
+            {
+                mvcResult.code = 405;
+            }
 
             Logger.Error("Invoke {0}.{1} error.\r\n{2}".FormatWith(controllerName, actionName, dataAdapter), innerException);
-            HttpContextUtil.CurrentHttpContext.Response.Write(SerializeUtil.ToJson(mvcResult));
+
+            WriteMvcResult(HttpContextUtil.CurrentHttpContext, mvcResult);
         }
 
 
@@ -266,9 +284,18 @@ Request:{1}".FormatWith(cookieData.ToString(), dataAdapter.ToString()));
             {
                 BeeMvcResult mvcResult = new BeeMvcResult();
                 mvcResult.code = 400;
-                mvcResult.message = e.Message;
-                httpContext.Response.Write(SerializeUtil.ToJson(mvcResult));
+                mvcResult.msg = e.Message;
+
+                WriteMvcResult(httpContext, mvcResult);
             }
+        }
+
+
+        private static void WriteMvcResult(HttpContext httpContext, BeeMvcResult mvcResult)
+        {
+            httpContext.Response.AppendHeader("Content-Type", "application/json; charset=utf-8");
+
+            httpContext.Response.Write(SerializeUtil.ToJson(mvcResult));
         }
 
         private static void CoreExecuteAction(HttpContext httpContext, string controllerName, string actionName, BeeDataAdapter dataAdapter)
@@ -358,14 +385,16 @@ Request:{1}".FormatWith(cookieData.ToString(), dataAdapter.ToString()));
                     mvcResult.data = result;
                     mvcResult.code = 200;
 
-                    httpContext.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(mvcResult, SerializeUtil.DefaultJsonSetting));
+                    WriteMvcResult(httpContext, mvcResult);
                 }
             }
             else
             {
+                httpContext.Response.AppendHeader("Content-Type", "application/json; charset=utf-8");
                 BeeMvcResult mvcResult = new BeeMvcResult();
                 mvcResult.code = 200;
-                httpContext.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(mvcResult, SerializeUtil.DefaultJsonSetting));
+
+                WriteMvcResult(httpContext, mvcResult);
             }
         }
 

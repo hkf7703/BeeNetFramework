@@ -1,4 +1,5 @@
 ﻿using Bee.Auth;
+using Bee.Util;
 using Bee.Web;
 using Bee.Web.Swagger;
 using System;
@@ -37,6 +38,14 @@ namespace Bee.WebDemo.Controllers
         public ActionResult LoginInfo()
         {
             return Json(LoginInfoManager.Instance.LoginInfo);
+        }
+
+        public object Test()
+        {
+            var data = BeeDataAdapter.New.Add("test", 1).Add("test2", DateTime.Now).Add("test3", 0.5533d).Add("test4", Guid.NewGuid()).Add("test5", null);
+            var data2 = BeeDataAdapter.New.Merge(data, true).Add("test6", data);
+            var json = SerializeUtil.ToJson(data2);
+            return BeeDataAdapter.From(json);
         }
     }
 }

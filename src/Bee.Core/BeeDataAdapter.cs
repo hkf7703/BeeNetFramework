@@ -14,20 +14,12 @@ namespace Bee
     /// <summary>
     /// 数据集
     /// </summary>
-    public class BeeDataAdapter
+    public class BeeDataAdapter : Dictionary<string, object>
     {
-        private Dictionary<string, object> data;
-
         #region Constructors
 
-        public BeeDataAdapter()
-            : this(new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase))
+        public BeeDataAdapter() : base(StringComparer.OrdinalIgnoreCase)
         {
-        }
-
-        public BeeDataAdapter(Dictionary<string, object> data)
-        {
-            this.data = new Dictionary<string, object>(data, StringComparer.InvariantCultureIgnoreCase);
         }
 
         public BeeDataAdapter(BeeDataAdapter dataAdapter)
@@ -46,32 +38,27 @@ namespace Bee
 
         #region Basic Operations
 
-        public BeeDataAdapter Add(string key, object value)
+        public new BeeDataAdapter Add(string key, object value)
         {
-            if (!data.ContainsKey(key) && value != null)
+            if (!ContainsKey(key) && value != null)
             {
-                this.data.Add(key, value);
+                base.Add(key, value);
             }
 
             return this;
         }
 
-        public bool ContainsKey(string key)
-        {
-            return this.data.ContainsKey(key);
-        }
-
         public void RemoveKey(string key)
         {
-            this.data.Remove(key);
+            this.Remove(key);
         }
 
         public void RemoveEmptyOrNull()
         {
             List<string> needRemovedKeyList = new List<string>();
-            foreach (string item in data.Keys)
+            foreach (string item in Keys)
             {
-                object value = data[item];
+                object value = this[item];
                 if (value == null)
                 {
                     needRemovedKeyList.Add(item);
@@ -86,26 +73,28 @@ namespace Bee
 
             foreach (string item in needRemovedKeyList)
             {
-                this.data.Remove(item);
+                this.Remove(item);
             }
         }
 
-        public void Merge(BeeDataAdapter dataAdapter, bool overrideFlag)
+        public BeeDataAdapter Merge(BeeDataAdapter dataAdapter, bool overrideFlag)
         {
             foreach (string key in dataAdapter.Keys)
             {
                 if (overrideFlag)
                 {
-                    data[key] = dataAdapter[key];
+                    this[key] = dataAdapter[key];
                 }
                 else
                 {
-                    if (!data.ContainsKey(key))
+                    if (!this.ContainsKey(key))
                     {
-                        data[key] = dataAdapter[key];
+                        this[key] = dataAdapter[key];
                     }
                 }
             }
+
+            return this;
         }
 
         // 若是
@@ -169,7 +158,7 @@ namespace Bee
         /// <returns></returns>
         public string ToSJson()
         {
-            return SerializeUtil.ToMsJson(this.data);
+            return SerializeUtil.ToJson(this);
         }
 
         public string FormatDateTime(string key, string format)
@@ -202,54 +191,27 @@ namespace Bee
             }
         }
 
-        public int Count
-        {
-            get
-            {
-                int result = 0;
-                if (this.data != null)
-                {
-                    result = this.data.Count;
-                }
 
-                return result;
-            }
-        }
-
-        public ICollection<string> Keys
-        {
-            get
-            {
-                ICollection<string> result = null;
-                if (data != null)
-                {
-                    result = this.data.Keys.ToList();
-                }
-
-                return result;
-            }
-        }
-
-        public object this[string key]
+        public new object this[string key]
         {
             get
             {
                 object result = null;
-                if (this.data.ContainsKey(key))
+                if (this.ContainsKey(key))
                 {
-                    result = this.data[key];
+                    result = base[key];
                 }
                 return result;
             }
             set
             {
-                if (this.data.ContainsKey(key))
+                if (this.ContainsKey(key))
                 {
-                    this.data[key] = value;
+                    base[key] = value;
                 }
                 else
                 {
-                    this.data.Add(key, value);
+                    this.Add(key, value);
                 }
             }
         }
@@ -257,31 +219,6 @@ namespace Bee
         #endregion
 
         #region From Methods
-
-        /// <summary>
-        /// 从DataRow构造一个DataAdapter
-        /// </summary>
-        /// <param name="dataRow">DataRow</param>
-        /// <returns>DataAdapter实例</returns>
-        public static BeeDataAdapter From(DataRow dataRow)
-        {
-            BeeDataAdapter dataAdapter = new BeeDataAdapter();
-
-            if (dataRow != null)
-            {
-                foreach (DataColumn column in dataRow.Table.Columns)
-                {
-                    object dbValue = dataRow[column];
-                    if (dbValue == DBNull.Value)
-                    {
-                        continue;
-                    }
-                    dataAdapter.Add(column.ColumnName, dataRow[column]);
-                }
-            }
-
-            return dataAdapter;
-        }
 
         /// <summary>
         /// 从一个对象实例中构造一个DataAdapter.
@@ -301,16 +238,32 @@ namespace Bee
                     string temp = value.ToString();
                     if (!string.IsNullOrEmpty(temp))
                     {
-                        Dictionary<string, object> dict = SerializeUtil.FromMsJson<Dictionary<string, object>>(temp);
+                        Dictionary<string, object> dict = SerializeUtil.FromJson<Dictionary<string, object>>(temp);
                         foreach (string item in dict.Keys)
                         {
                             dataAdapter[item] = dict[item];
                         }
                     }
                 }
+                else if(value is DataRow)
+                {
+                    var dataRow = value as DataRow;
+
+                    if (dataRow != null)
+                    {
+                        foreach (DataColumn column in dataRow.Table.Columns)
+                        {
+                            object dbValue = dataRow[column];
+                            if (dbValue == DBNull.Value)
+                            {
+                                continue;
+                            }
+                            dataAdapter.Add(column.ColumnName, dataRow[column]);
+                        }
+                    }
+                }
                 else
                 {
-
                     IEntityProxy entityProxy = EntityProxyManager.Instance.GetEntityProxyFromType(value.GetType());
                     foreach (PropertySchema item in entityProxy.GetPropertyList())
                     {

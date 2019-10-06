@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Globalization;
 using Bee.Core;
+using System.Web;
 
 namespace Bee.Util
 {
@@ -100,7 +101,12 @@ namespace Bee.Util
 
         public static void ThrowMessageException(string message)
         {
-            throw new CoreException(message);
+            throw new ArgumentException(message);
+        }
+
+        public static void ThrowHttpCodeException(int code, string message)
+        {
+            throw new HttpException(code, message);
         }
 
     }
